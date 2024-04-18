@@ -12,7 +12,7 @@ public class AlgoritmosOrdenamiento {
         System.out.println("Escribir el numero de tiempos a Ingresa :");
         int input=lec.nextInt();
         for(int i=0; i< input;i++){
-            System.out.println("Digite el Tiempo del Atleta numero: "+i+1);
+            System.out.println("Digite el Tiempo del Atleta numero: "+(i+1));
             double tiempoAtleta=lec.nextDouble();
             registrarTiempos(tiempoAtleta);  
         }
@@ -29,10 +29,12 @@ public class AlgoritmosOrdenamiento {
             option=lec.nextInt();
             switch (option) {
                 case 1:
-                    
+                    ordenarPorSeleccion();
+                    mostrarTiempos();
                     break;
                 case 2:
-                    
+                    ordenarPorInsercion();
+                    mostrarTiempos();
                     break;
                 case 3:
                     
@@ -59,9 +61,40 @@ public class AlgoritmosOrdenamiento {
         for(Atleta a: atletas){
             System.out.println(a.getTiempo());
         }
-        
     
     }
     
-    
+    public static void ordenarPorInsercion(){
+        for(int i=1; i<atletas.size();i++){
+            boolean agregado =false;
+            for(int j=i;j>0 && !agregado;j--){
+                Atleta uno = atletas.get(j);
+                Atleta dos = atletas.get(j-1);
+                if(uno.getTiempo()< dos.getTiempo()){
+                    atletas.set(j, dos);
+                    atletas.set(j-1, uno);
+                }else {
+                    agregado= true;
+                
+                }
+            
+            }
+        }
+    }
+    public static void ordenarPorSeleccion() {
+        for (int i = 0; i < atletas.size() - 1; i++) {
+            Atleta menor = atletas.get(i);
+            int posMenor = i;
+            for (int j = i + 1; j < atletas.size(); j++) {
+                Atleta actual = atletas.get(j);
+                if (actual.getTiempo() < menor.getTiempo()) {
+                    menor = actual;
+                    posMenor = j;
+                }
+            }
+            Atleta temp = atletas.get(i);
+            atletas.set(i, menor);
+            atletas.set(posMenor, temp);
+        }
+    }
 }
