@@ -37,7 +37,8 @@ public class AlgoritmosOrdenamiento {
                     mostrarTiempos();
                     break;
                 case 3:
-                    
+                    ordenarPorBurbuja();
+                    mostrarTiempos();
                     break;
                 case 4:
                     System.exit(0);
@@ -96,5 +97,20 @@ public class AlgoritmosOrdenamiento {
             atletas.set(i, menor);
             atletas.set(posMenor, temp);
         }
+    }
+    
+    public static void ordenarPorBurbuja() {
+        int n = atletas.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                Atleta uno = atletas.get(j);
+                Atleta dos = atletas.get(j + 1);
+                if (uno.getTiempo() > dos.getTiempo()) {
+                    atletas.set(j, dos);
+                    atletas.set(j + 1, uno);
+                }
+            }
+        }
+    
     }
 }
